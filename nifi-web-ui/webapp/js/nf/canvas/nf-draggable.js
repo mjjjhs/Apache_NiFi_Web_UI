@@ -66,6 +66,7 @@
 
     /**
      * Updates the positioning of all selected components.
+     * 선택한 모든 구성 요소의 위치를 업데이트하십시오.
      *
      * @param {selection} dragSelection The current drag selection
      */
@@ -88,6 +89,7 @@
         var selectedComponents = d3.selectAll('g.component.selected');
 
         // ensure every component is writable
+        // 모든 구성 요소가 쓰기 가능하도록 보장
         if (nfCanvasUtils.canModify(selectedConnections) === false || nfCanvasUtils.canModify(selectedComponents) === false) {
             nfDialog.showOkDialog({
                 headerText: 'Component Position',
@@ -97,6 +99,7 @@
         }
 
         // go through each selected connection
+        // 선택한 각 연결을 통과하십시오.
         selectedConnections.each(function (d) {
             var connectionUpdate = nfDraggable.updateConnectionPosition(d, delta);
             if (connectionUpdate !== null) {
@@ -118,6 +121,7 @@
             });
 
             // consider the component itself
+            // 구성 요소 자체를 고려한다.
             updates.set(d.id, nfDraggable.updateComponentPosition(d, delta));
         });
 
@@ -157,6 +161,7 @@
             nfCanvas = canvas;
 
             // handle component drag events
+            // 구성 요소 드래그 이벤트 처리
             drag = d3.drag()
                 .on('start', function () {
                     // stop further propagation
@@ -166,11 +171,14 @@
                     var dragSelection = d3.select('rect.drag-selection');
 
                     // lazily create the drag selection box
+                    // 끌기 선택 상자를 늦게 만듭니다.
                     if (dragSelection.empty()) {
                         // get the current selection
+                        // 현재 선택 항목을 가져옵니다.
                         var selection = d3.selectAll('g.component.selected');
 
                         // determine the appropriate bounding box
+                        // 적절한 경계 상자를 결정한다.
                         var minX = null, maxX = null, minY = null, maxY = null;
                         selection.each(function (d) {
                             if (minX === null || d.position.x < minX) {
@@ -231,18 +239,22 @@
                     d3.event.sourceEvent.stopPropagation();
 
                     // get the drag selection
+                    // 드래그 선택 가져 오기
                     var dragSelection = d3.select('rect.drag-selection');
 
                     // ensure we found a drag selection
+                    // 드래그 선택을 찾았는지 확인하십시오.
                     if (dragSelection.empty()) {
                         return;
                     }
 
                     // get the destination group if applicable... remove the drop flag if necessary to prevent
                     // subsequent drop events from triggering prior to this move's completion
+                    // 해당되는 경우 대상 그룹을 가져옵니다 ...이 이동 완료 전에 후속 삭제 이벤트가 발생하지 않도록 필요한 경우 삭제 플래그를 제거하십시오.
                     var group = d3.select('g.drop').classed('drop', false);
 
                     // either move or update the selections group as appropriate
+                    // 적절하게 선택 그룹을 이동하거나 업데이트하십시오.
                     if (group.empty()) {
                         updateComponentsPosition(dragSelection);
                     } else {

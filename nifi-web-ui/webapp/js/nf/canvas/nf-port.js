@@ -87,6 +87,7 @@
 
     /**
      * Selects the port elements against the current port map.
+     * 현재 포트 맵에 대해 포트 요소를 선택하십시오.
      */
     var select = function () {
         return portContainer.selectAll('g.input-port, g.output-port').data(portMap.values(), function (d) {
@@ -96,6 +97,7 @@
 
     /**
      * Renders the ports in the specified selection.
+     * 지정된 선택 항목에서 포트를 렌더링하십시오.
      *
      * @param {selection} entered           The selection of ports to be rendered
      * @param {boolean} selected            Whether the port should be selected
@@ -197,6 +199,7 @@
         port.call(nfSelectable.activate).call(nfContextMenu.activate).call(nfQuickSelect.activate);
 
         // only activate dragging and connecting if appropriate
+        // 필요한 경우 끌어서 연결만 활성화하십시오.
         port.filter(function (d) {
             return d.permissions.canWrite && d.permissions.canRead;
         }).call(nfDraggable.activate).call(nfConnectable.activate);
@@ -605,6 +608,7 @@
 
         /**
          * Adds the specified port entity.
+         * 지정된 포트 도면요소를 추가합니다.
          *
          * @param portEntities       The port
          * @param options           Configuration options

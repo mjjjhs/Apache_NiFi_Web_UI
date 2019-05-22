@@ -77,6 +77,7 @@
             };
 
             // create a new processor of the defined type
+            // 정의된 유형의 새 프로세서를 작성합니다
             $.ajax({
                 type: 'POST',
                 url: serviceProvider.headerCtrl.toolboxCtrl.config.urls.api + '/process-groups/' + encodeURIComponent(nfCanvasUtils.getGroupId()) + '/input-ports',
@@ -85,6 +86,7 @@
                 contentType: 'application/json'
             }).done(function (response) {
                 // add the port to the graph
+                // 그래프에 포트를 추가합니다
                 nfGraph.add({
                     'inputPorts': [response]
                 }, {

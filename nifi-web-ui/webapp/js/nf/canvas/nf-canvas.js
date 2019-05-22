@@ -284,6 +284,7 @@
          * Reloads the flow from the server based on the currently specified group id.
          * To load another group, set the groupId parameter otherwise the current group
          * will be reloaded.
+         * 현재 지정된 그룹 ID를 기준으로 서버에서 흐름을 다시 로드합니다.다른 그룹을 로드하려면 그룹ID 매개변수를 설정합니다.그렇지 않으면 현재 그룹이 다시 로드됩니다.
          */
         reload: function (options, groupId) {
             return $.Deferred(function (deferred) {
@@ -342,6 +343,7 @@
 
         /**
          * Initializes the canvas.
+         * 캔버스를 초기화한다.
          */
         initCanvas: function () {
             var canvasContainer = $('#canvas-container');
@@ -350,9 +352,11 @@
             svg = d3.select('#canvas-container').append('svg')
                 .on('contextmenu', function () {
                     // reset the canvas click flag
+                    // 캔버스 클릭 플래그 재설정
                     canvasClicked = false;
 
                     // since the context menu event propagated back to the canvas, clear the selection
+                    // 컨텍스트 메뉴 이벤트가 캔버스로 다시 전파되었으므로 선택을 취소합니다
                     nfCanvasUtils.getSelection().classed('selected', false);
 
                     // update URL deep linking params
@@ -369,6 +373,7 @@
             var defs = svg.append('defs');
 
             // create arrow definitions for the various line types
+            // 다양한 선 유형에 대한 화살표 정의 생성
             defs.selectAll('marker')
                 .data(['normal', 'ghost', 'unauthorized', 'full'])
                 .enter().append('marker')
@@ -440,6 +445,7 @@
                 });
 
             // stack the effect under the source graph
+            // 효과를 소스 그래프 아래에 쌓다
             var componentDropShadowFeMerge = componentDropShadowFilter.append('feMerge');
             componentDropShadowFeMerge.append('feMergeNode')
                 .attr('in', 'offsetColorBlur');
@@ -489,6 +495,7 @@
                 });
 
             // stack the effect under the source graph
+            // 효과를 소스 그래프 아래에 쌓다
             var connectionFullFeMerge = connectionFullDropShadowFilter.append('feMerge');
             connectionFullFeMerge.append('feMergeNode')
                 .attr('in', 'offsetColorBlur');
@@ -510,11 +517,13 @@
                 if (d3.event.button !== 0) {
                     // prevent further propagation (to parents and others handlers
                     // on the same element to prevent zoom behavior)
+                    // 추가 전파 방지(확대 동작을 방지하기 위해 동일한 요소에 있는 부모 및 다른 핸들러에게)
                     d3.event.stopImmediatePropagation();
                     return;
                 }
 
                 // show selection box if shift is held down
+                // Shift를 누른 경우 선택 상자 표시
                 if (d3.event.shiftKey) {
                     var position = d3.mouse(canvas.node());
                     canvas.append('rect')
@@ -535,14 +544,17 @@
 
                     // prevent further propagation (to parents and others handlers
                     // on the same element to prevent zoom behavior)
+                    // 추가 전파 방지(확대 동작을 방지하기 위해 동일한 요소에 있는 부모 및 다른 핸들러에게)
                     d3.event.stopImmediatePropagation();
 
                     // prevents the browser from changing to a text selection cursor
+                    // 브라우저가 텍스트 선택 커서로 변경되지 않도록 방지
                     d3.event.preventDefault();
                 }
             })
             .on('mousemove.selection', function () {
                 // update selection box if shift is held down
+                // 시프트가 중단된 경우 선택 상자 업데이트
                 if (d3.event.shiftKey) {
                     // get the selection box
                     var selectionBox = d3.select('rect.component-selection');
@@ -581,6 +593,7 @@
                 // when clicking on a component, the event propagation is stopped so
                 // it never reaches the canvas. we cannot do this however on up events
                 // since the drag events break down
+                // 구성 요소가 아닌 캔버스를 클릭하는 것에서 비롯되었는지 확인하십시오.구성 요소를 클릭할 때 이벤트 전파는 캔버스에 도달하지 않도록 중지된다. 그러나 드래그 이벤트가 고장나서 우리는 이것을 할 수 없다.
                 if (canvasClicked === false) {
                     return;
                 }
@@ -599,19 +612,24 @@
                     };
 
                     // see if a component should be selected or not
+                    // 구성요소를 선택해야 하는지 여부를 확인합니다
                     d3.selectAll('g.component').classed('selected', function (d) {
                         // consider it selected if its already selected or enclosed in the bounding box
+                        // 이미 선택된 경우 또는 경계 상자에 동봉된 경우 선택한 것으로 간주한다.
                         return d3.select(this).classed('selected') ||
                             d.position.x >= selectionBoundingBox.x && (d.position.x + d.dimensions.width) <= (selectionBoundingBox.x + selectionBoundingBox.width) &&
                             d.position.y >= selectionBoundingBox.y && (d.position.y + d.dimensions.height) <= (selectionBoundingBox.y + selectionBoundingBox.height);
                     });
 
                     // see if a connection should be selected or not
+                    // 연결을 선택해야 하는지 여부 확인
                     d3.selectAll('g.connection').classed('selected', function (d) {
                         // consider all points
+                        // 모든 점을 고려해
                         var points = [d.start].concat(d.bends, [d.end]);
 
                         // determine the bounding box
+                        // 경계선을 정하다
                         var x = d3.extent(points, function (pt) {
                             return pt.x;
                         });
@@ -620,6 +638,7 @@
                         });
 
                         // consider it selected if its already selected or enclosed in the bounding box
+                        // 이미 선택된 경우 또는 경계 상자에 동봉된 경우 선택한 것으로 간주한다.
                         return d3.select(this).classed('selected') ||
                             x[0] >= selectionBoundingBox.x && x[1] <= (selectionBoundingBox.x + selectionBoundingBox.width) &&
                             y[0] >= selectionBoundingBox.y && y[1] <= (selectionBoundingBox.y + selectionBoundingBox.height);
@@ -637,6 +656,7 @@
             });
 
             // define a function for update the graph dimensions
+            // 그래프 치수를 업데이트하는 함수 정의
             var updateGraphSize = function () {
                 // get the location of the bottom of the graph
                 var footer = $('#banner-footer');
@@ -686,9 +706,11 @@
             });
 
             // don't let the reload action get called more than once every second
+            // 리로드 작업이 매초마다 한 번 이상 호출되지 않도록 하십시오.
             var throttledCanvasReload = nfCommon.throttle(nfActions.reload, 1000);
 
             // listen for browser resize events to reset the graph size
+            // 브라우저 크기 조정 이벤트를 듣고 그래프 크기를 재설정합니다
             $(window).on('resize', function (e) {
                 if (e.target === window) {
                     // close the hamburger menu if open
@@ -699,6 +721,7 @@
                     updateGraphSize();
 
                     // resize shell when appropriate
+                    // 적절한 경우 껍질 크기 조정
                     var shell = $('#shell-dialog');
                     if (shell.is(':visible')){
                         setTimeout(function(shell){

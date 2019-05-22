@@ -219,6 +219,7 @@
 
         /**
          * Activates the connect behavior for the components in the specified selection.
+         * 지정된 선택사항의 구성요소에 대한 연결 동작을 활성화합니다.
          *
          * @param {selection} components
          */
