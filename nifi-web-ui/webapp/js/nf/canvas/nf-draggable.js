@@ -108,8 +108,10 @@
         });
 
         // go through each selected component
+        // 선택한 각 구성 요소를 검토하십시오.
         selectedComponents.each(function (d) {
             // consider any self looping connections
+            // 자체 루핑 연결 고려
             var connections = nfConnection.getComponentConnections(d.id);
             $.each(connections, function (_, connection) {
                 if (!updates.has(connection.id) && nfCanvasUtils.getConnectionSourceComponentId(connection) === nfCanvasUtils.getConnectionDestinationComponentId(connection)) {
@@ -130,11 +132,13 @@
 
     /**
      * Updates the parent group of all selected components.
+     * 선택한 모든 구성 요소의 상위 그룹을 업데이트합니다.
      *
      * @param {selection} the destination group
      */
     var updateComponentsGroup = function (group) {
         // get the selection and deselect the components being moved
+        // 선택 항목을 가져오고 이동할 구성 요소의 선택을 취소하십시오.
         var selection = d3.selectAll('g.component.selected, g.connection.selected').classed('selected', false);
 
         if (nfCanvasUtils.canModify(selection) === false) {
@@ -224,6 +228,7 @@
                     } else {
                         // update the position of the drag selection
                         // snap align the position unless the user is holding shift
+                        // 드래그 선택 스냅의 위치를 업데이트합니다. 사용자가 교대를 유지하지 않는 한 위치를 정렬합니다.
                         snapEnabled = !d3.event.sourceEvent.shiftKey;
                         dragSelection.attr('x', function (d) {
                             d.x += d3.event.dx;
@@ -250,7 +255,7 @@
 
                     // get the destination group if applicable... remove the drop flag if necessary to prevent
                     // subsequent drop events from triggering prior to this move's completion
-                    // 해당되는 경우 대상 그룹을 가져옵니다 ...이 이동 완료 전에 후속 삭제 이벤트가 발생하지 않도록 필요한 경우 삭제 플래그를 제거하십시오.
+                    // 해당되는 경우 대상 그룹을 가져옵니다... 필요한 경우 드롭 플래그를 제거하여이 이동 완료 전에 후속 드롭 이벤트가 트리거되지 않도록하십시오.
                     var group = d3.select('g.drop').classed('drop', false);
 
                     // either move or update the selections group as appropriate
@@ -268,6 +273,7 @@
 
         /**
          * Update the component's position
+         * 구성 요소의 위치 업데이트
          *
          * @param d     The component
          * @param delta The change in position

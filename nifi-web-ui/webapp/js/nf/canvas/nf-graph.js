@@ -109,6 +109,7 @@
 
     /**
      * Updates component visibility based on their proximity to the screen's viewport.
+     * 화면의 뷰포트에 대한 근접성을 기반으로 구성 요소 가시성을 업데이트합니다.
      */
     var updateComponentVisibility = function () {
         var canvasContainer = $('#canvas-container');

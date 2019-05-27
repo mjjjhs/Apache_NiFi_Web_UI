@@ -67,6 +67,7 @@
         var graphBottom = (graphBox.bottom / scale) - translate[1];
 
         // get the screen bounding box and convert into canvas space
+        // 화면 경계 상자를 가져 와서 캔버스 공간으로 변환
         var canvasContainer = $('#canvas-container');
         var screenWidth = canvasContainer.width() / scale;
         var screenHeight = canvasContainer.height() / scale;

@@ -703,6 +703,7 @@
 
             /**
              * Prompts the user to select the type of new processor to create.
+             * 사용자가 만들 새 프로세서 유형을 선택하라는 메시지를 표시합니다.
              *
              * @argument {object} pt        The point that the processor was dropped
              */
@@ -829,6 +830,7 @@
                 nfFilteredDialogCommon.addKeydownListener('#processor-type-filter', grid, dataview);
 
                 // adjust the grid canvas now that its been rendered
+                // 렌더링 된 그리드 캔버스 조정
                 grid.resizeCanvas();
 
                 // auto select the first row if possible

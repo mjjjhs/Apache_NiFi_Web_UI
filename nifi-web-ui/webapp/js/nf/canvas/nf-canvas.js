@@ -255,6 +255,7 @@
 
         /**
          * Determines if the current broswer supports SVG.
+         * 현재 broswer가 SVG를 지원하는지 여부를 판별합니다.
          */
         SUPPORTS_SVG: !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect,
 
@@ -1178,6 +1179,7 @@
 
                 /**
                  * Translates by the specified [x, y].
+                 * 지정된 [x, y]로 번역합니다.
                  *
                  * @param {array} translate     [x, y] to translate by
                  */
@@ -1196,6 +1198,7 @@
 
                 /**
                  * Sets the current transform.
+                 * 현재의 변환을 설정합니다.
                  *
                  * @param translate
                  * @param scale
@@ -1326,7 +1329,9 @@
 
                 /**
                  * Refreshes the view based on the configured translation and scale.
-                 *
+                 * 구성된 변환 및 축척을 기반으로보기를 새로 고칩니다.
+
+                 * 
                  * @param {object} options Options for the refresh operation
                  */
                 refresh: function (options) {
@@ -1346,11 +1351,13 @@
                         }
 
                         // update component visibility
+                        // 구성 요소 가시성 업데이트
                         if (refreshComponents) {
                             nfGraph.updateVisibility();
                         }
 
                         // persist if appropriate
+                        // 적절하다면 지속하라.
                         if (persist === true) {
                             nfCanvasUtils.persistUserView();
                         }

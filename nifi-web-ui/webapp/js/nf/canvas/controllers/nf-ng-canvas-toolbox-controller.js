@@ -103,11 +103,14 @@
 
             /**
              * Gets the draggable configuration for a toolbox component.
+             * 도구 상자 구성 요소의 드래그 가능한 구성을 가져옵니다.
              *
              * @param {object} component        The component responsible for handling the stop event.
+             * stop 이벤트를 처리하는 구성 요소입니다.
              * @returns {object}                The draggable configuration.
              *
              * NOTE: The `component` must implement a dropHandler.
+             * 참고 : '구성 요소'는 dropHandler를 구현해야합니다.
              */
             draggableComponentConfig: function (component) {
 

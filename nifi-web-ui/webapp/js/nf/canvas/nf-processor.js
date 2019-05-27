@@ -1071,6 +1071,7 @@
 
         /**
          * Populates the graph with the specified processors.
+         * 그래프를 지정된 프로세서로 채 웁니다.
          *
          * @argument {object | array} processorEntities                The processors to add
          * @argument {object} options                Configuration options
