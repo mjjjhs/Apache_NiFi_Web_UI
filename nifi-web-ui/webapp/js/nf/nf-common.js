@@ -1517,6 +1517,7 @@
 
         /**
          * Determines if the specified object is defined and not null.
+         * 지정된 오브젝트가 정의되어있어 null가 아닌지 어떤지를 판정합니다.
          *
          * @argument {object} obj   The object to test
          */

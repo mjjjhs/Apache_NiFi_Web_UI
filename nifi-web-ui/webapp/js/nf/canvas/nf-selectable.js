@@ -73,6 +73,7 @@
 
         /**
          * Activates the select behavior for the components in the specified selection.
+         * 지정된 선택 항목의 구성 요소에 대한 선택 비헤이비어를 활성화합니다.
          *
          * @param {selection} components
          */

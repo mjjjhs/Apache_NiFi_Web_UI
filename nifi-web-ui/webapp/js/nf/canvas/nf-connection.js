@@ -332,7 +332,7 @@
         var connection = entered.append('g')
             .attrs({
                 'id': function (d) {
-                    return 'id-' + d.id;a
+                    return 'id-' + d.id;
                 },
                 'class': 'connection'
             })

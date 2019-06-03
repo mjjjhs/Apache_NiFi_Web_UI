@@ -216,6 +216,7 @@
 
         /**
          * Populates the graph with the resources defined in the response.
+         * 응답에 정의 된 자원으로 그래프를 채 웁니다.
          *
          * @argument {object} processGroupContents      The contents of the process group
          * @argument {boolean} selectAll                Whether or not to select the new contents

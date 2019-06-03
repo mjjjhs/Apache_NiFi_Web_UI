@@ -1306,12 +1306,14 @@
 
         /**
          * Shows the dialog for creating a new connection.
+         * 새 연결 만들기 대화 상자를 표시합니다.
          *
          * @argument {string} sourceId      The source id
          * @argument {string} destinationId The destination id
          */
         createConnection: function (sourceId, destinationId) {
             // select the source and destination
+            // 출처와 목적지를 선택하십시오.
             var source = d3.select('#id-' + sourceId);
             var destination = d3.select('#id-' + destinationId);
 
@@ -1320,6 +1322,7 @@
             }
 
             // initialize the connection dialog
+            // 연결 대화 상자를 초기화하십시오.
             $.when(initializeSourceNewConnectionDialog(source), initializeDestinationNewConnectionDialog(destination)).done(function () {
                 // set the default values
                 $('#flow-file-expiration').val('0 sec');
@@ -1339,12 +1342,14 @@
                 nfCommon.populateField('connection-id', null);
 
                 // show the border if necessary
+                // 필요한 경우 국경을 표시하십시오.
                 var relationshipNames = $('#relationship-names');
                 if (relationshipNames.is(':visible') && relationshipNames.get(0).scrollHeight > Math.round(relationshipNames.innerHeight())) {
                     relationshipNames.css('border-width', '1px');
                 }
             }).fail(function () {
                 // see if the temp edge needs to be removed
+                // 임시 모서리를 제거해야하는지 확인하십시오.
                 removeTempEdge();
             });
         },
